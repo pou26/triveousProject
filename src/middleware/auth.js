@@ -13,7 +13,7 @@ const authentication = function (req, res, next) {
 
         let token = bearerToken[1];
 
-        jwt.verify(token, "project-5-Products_Management_61", function (err, data) {
+        jwt.verify(token, "shopping-cart", function (err, data) {
             if (err) {
                 return res.status(401).send({ status: false, message: "Unauthenticate User or Token is invalid" })
             }

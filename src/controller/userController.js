@@ -181,7 +181,7 @@ const loginUser = async function (req, res) {
             {
                 userId: user._id.toString(),
             },
-            'project-5-Products_Management_61',
+            'shopping-cart',
             {expiresIn:"12h"}
         )
 
