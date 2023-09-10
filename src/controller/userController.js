@@ -18,21 +18,6 @@ const createUser = async (req,res) =>{
         // checking if user does not enters any data
         if (Object.keys(data) == 0) { return res.status(400).send({status:false,message:"No data provided"})}
 
-        // checking files are coming or not
-        let files= req.files
-        if(files && files.length>0){
-            let validImage=files[0].mimetype.split('/')
-            if(validImage[0]!="image"){
-           return res.status(400).send({ status: false, message: "Please Provide Valid Image.." })}
-  
-      let uploadedFileURL= await uploadFile(files[0])
-
-  
-      profileImage=uploadedFileURL
-  }
-  else{
-      return res.status(400).send({ msg: "No file found" })
-  }
 
         // checking for fname 
         if (!(valid.isValid(fname))) { return res.status(400).send({status:false, message:"please enter first name"}) }
@@ -121,7 +106,6 @@ const createUser = async (req,res) =>{
             fname: fname,
             lname: lname,
             email: email,
-            profileImage: profileImage,
             phone: phone,
             password: hash,
             address: address
@@ -233,15 +217,7 @@ let updateUser = async (req, res) => {
 
         let updateData={}
 
-        if (files && files.length > 0) {
-            let validImage=files[0].mimetype.split('/')
-            if(validImage[0]!="image"){
-           return res.status(400).send({ status: false, message: "Please Provide Valid Image.." })}
 
-            let uploadedFileURL = await uploadFile(files[0])
-            updateData.profileImage = uploadedFileURL
-        }
-        
         if (fname) {
 
             if (!valid.isValidName(fname)) {
